@@ -51,12 +51,16 @@ angular.module('myApp', []).
     controller('Ctrl', ['$scope', '$http', function($scope, $http) {
         $scope.initialize = function () {
             $scope.chartData = [10,20,30,40,60];
+            $scope.$watch('symbol', function() {
+                $scope.loadData();
+            });
         };
 
+        $scope.onSymbolChange = function() {$scope.loadData();};
 
         $scope.loadData = function() {
             var httpRequest = $http.jsonp('https://sly.01phi.com:53850/echo?callback=JSON_CALLBACK',
-                {params: {"key1": "value1", "key2": "value2"}}).
+                {params: {"key1": "value1", "key2": "value2", "symbol": $scope.symbol}}).
             success(function(data, status, headers, config) {
                 $scope.chartData = data;
                 console.log(data);

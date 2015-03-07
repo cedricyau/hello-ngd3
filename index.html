@@ -8,9 +8,9 @@
 </head>
 <body ng-app="myApp" ng-controller="Ctrl">
 Chart below: {{chartData}}
+<input ng-model="symbol" ng-change="onSymbolChanged()"/>
 <div>
         <bars-chart chart-data="chartData"  ></bars-chart>
 </div>
- <p>    Click <a ng-click="loadData()">here</a> to load data.</p>
 </body>
 </html>
